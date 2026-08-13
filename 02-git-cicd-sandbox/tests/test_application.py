@@ -1,6 +1,6 @@
 import pytest
 
-from application import add, divide, multiply, subtract
+from application import add, divide, exponent, multiply, subtract
 
 
 def test_add():
@@ -22,3 +22,8 @@ def test_divide():
 def test_divide_by_zero_raises():
     with pytest.raises(ValueError, match="cannot divide by zero"):
         divide(10, 0)
+
+
+def test_exponent():
+    assert exponent(2, 8) == 256
+    assert exponent(5, 2) == 25
