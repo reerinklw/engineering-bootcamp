@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdobeTheme } from './theme';
+import { AdobeTheme } from '../lib/theme';
 
 interface LegacyMediaCardProps {
   asset: {
@@ -62,13 +62,9 @@ export const LegacyMediaCard: React.FC<LegacyMediaCardProps> = ({ asset }) => {
   return (
     <div style={styles.card}>
       <img src={`/thumbnails/${asset.id}.jpg`} alt={asset.filename} style={styles.image} />
-      <div style={styles.filename}>
-        {asset.filename}
-      </div>
+      <div style={styles.filename}>{asset.filename}</div>
       <span style={styles.size}>Size: {asset.sizeBytes}</span>
-      <button style={styles.button}>
-        Edit Asset
-      </button>
+      <button style={styles.button}>Edit Asset</button>
     </div>
   );
 };
