@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AdobeTheme } from '../lib/theme';
+import { AdobeTheme } from './theme';
 
 export const Header = () => {
   const [isExporting, setIsExporting] = useState(false);

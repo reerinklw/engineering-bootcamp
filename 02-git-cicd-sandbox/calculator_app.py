@@ -1,7 +1,11 @@
 """Visual calculator built with Streamlit."""
 
+import sys
+from pathlib import Path
+
 import streamlit as st
 
+sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 from application import OPERATIONS
 
 st.title("Calculator")
