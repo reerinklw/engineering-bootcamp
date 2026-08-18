@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: gym_postgres
+    environment:
+      POSTGRES_DB: gym_tracker
+      POSTGRES_USER: gym_user
+      POSTGRES_PASSWORD: gym_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gym_user -d gym_tracker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - gym_network
+
+  streamlit:
+    build: .
+    container_name: gym_streamlit
+    environment:
+      DB_HOST: postgres
+      DB_NAME: gym_tracker
+      DB_USER: gym_user
+      DB_PASSWORD: gym_password
+    ports:
+      - "8502:8501"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - gym_network
+
+volumes:
+  postgres_data:
+
+networks:
+  gym_network:
+    driver: bridge
